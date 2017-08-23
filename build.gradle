@@ -1,0 +1,22 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.1.4-2"
+    id "application"
+}
+
+mainClassName = "io.pivotal.pal.kotlinsample.KotlinSampleKt"
+
+jar {
+    manifest {
+        attributes(
+            "Main-Class": mainClassName
+        )
+    }
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib")
+}
